@@ -12,6 +12,7 @@ public class Util {
     private static final String DB_USER = "root";
     private static final String DB_PASSWORD = "2443254";
 
+    private static Connection connection;
     private static Logger logger = Logger.getLogger(Util.class.getName());
 
     private Util() {
@@ -19,7 +20,7 @@ public class Util {
     }
 
     public static Connection getConnection() {
-        Connection connection = null;
+        connection = null;
         try {
             Class.forName(DB_DRIVER);
             connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
@@ -32,7 +33,7 @@ public class Util {
         return connection;
     }
 
-    public static void closeConnection(Connection connection) {
+    public static void closeConnection() {
         if (connection != null) {
             try {
                 connection.close();

@@ -15,7 +15,7 @@ import java.util.logging.Logger;
 import static jm.task.core.jdbc.util.Util.closeConnection;
 
 public class UserDaoJDBCImpl implements UserDao {
-    private Connection connection = Util.getConnection();
+    private final Connection connection = Util.getConnection();
     private static final Logger logger = Logger.getLogger(UserDaoJDBCImpl.class.getName());
 
 
@@ -37,8 +37,6 @@ public class UserDaoJDBCImpl implements UserDao {
             logger.info("Таблица создана");
         } catch (SQLException e) {
             throw new RuntimeException("Ошибка создания таблицы", e);
-        } finally {
-            closeConnection(connection);
         }
 
 
@@ -52,8 +50,6 @@ public class UserDaoJDBCImpl implements UserDao {
             logger.info("Таблица удалена");
         } catch (SQLException e) {
             throw new RuntimeException("Ошибка удаления таблицы", e);
-        } finally {
-            closeConnection(connection);
         }
     }
 
@@ -75,8 +71,6 @@ public class UserDaoJDBCImpl implements UserDao {
             }
 
             throw new RuntimeException("Ошибка добавления пользователя", e);
-        } finally {
-            closeConnection(connection);
         }
     }
 
@@ -96,8 +90,6 @@ public class UserDaoJDBCImpl implements UserDao {
                 throw new RuntimeException(ex);
             }
             throw new RuntimeException("Ошибка удаления пользователя по id", e);
-        } finally {
-            closeConnection(connection);
         }
 
     }
@@ -118,8 +110,6 @@ public class UserDaoJDBCImpl implements UserDao {
             }
         } catch (SQLException e) {
             throw new RuntimeException("Ошибка получения данных из таблицы", e);
-        } finally {
-            closeConnection(connection);
         }
         System.out.println(users);
         return users;
@@ -139,8 +129,6 @@ public class UserDaoJDBCImpl implements UserDao {
                 throw new RuntimeException(ex);
             }
             throw new RuntimeException("Ошибка удаления данных из таблицы", e);
-        } finally {
-            closeConnection(connection);
         }
 
     }
